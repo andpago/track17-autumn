@@ -1,7 +1,7 @@
 package ru.track.cypher;
 
-import java.util.LinkedHashMap;
-import java.util.Map;
+import java.util.*;
+import java.util.stream.Collectors;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -53,7 +53,28 @@ public class Decoder {
      */
     @NotNull
     Map<Character, Integer> createHist(@NotNull String text) {
-        return null;
+        Map<Character, Integer> res = new HashMap<>();
+        Character c;
+
+        for (char i='a'; i <= 'z'; i++) {
+            res.put(i, 0);
+        }
+
+        for(int i=0;i<text.length();i++) {
+            c = text.charAt(i);
+            c = Character.toLowerCase(c);
+            if ('a' <= c && c <= 'z') {
+                res.replace(c, res.get(c) + 1);
+            }
+        }
+
+        LinkedHashMap<Character, Integer> sortedMap =
+                res.entrySet().stream().
+                        sorted(Map.Entry.comparingByValue(Collections.reverseOrder())).
+                        collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue,
+                                (e1, e2) -> e1, LinkedHashMap::new));
+
+        return sortedMap;
     }
 
 }

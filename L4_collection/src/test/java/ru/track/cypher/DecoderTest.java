@@ -34,7 +34,6 @@ public class DecoderTest {
 
 
     @Test
-    @Ignore
     public void createHist() throws Exception {
 
         Map<Character, Integer> hist = decoder.createHist(domain);
