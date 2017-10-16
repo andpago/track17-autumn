@@ -46,7 +46,6 @@ public class DecoderTest {
     }
 
     @Test
-    @Ignore
     public void simple() throws Exception {
         final Map<Character, Character> cypher = CypherUtil.generateCypher();
         System.out.println("Cypher: " + cypher);

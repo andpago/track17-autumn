@@ -24,7 +24,12 @@ public class Decoder {
 
         cypher = new LinkedHashMap<>();
 
+        Iterator<Character> it1 = domainHist.keySet().iterator(),
+                            it2 = encryptedDomainHist.keySet().iterator();
 
+        while(it1.hasNext() && it2.hasNext()) {
+            cypher.put(it2.next(), it1.next());
+        }
     }
 
     public Map<Character, Character> getCypher() {
@@ -39,7 +44,13 @@ public class Decoder {
      */
     @NotNull
     public String decode(@NotNull String encoded) {
-        return null;
+        return encoded.
+                chars().
+                boxed().
+                map((Integer i) -> (char) i.intValue()).
+                map(c -> cypher.containsKey(c) ? cypher.get(c) : c).
+                map((Character c) -> c.toString()).
+                collect(Collectors.joining());
     }
 
     /**
